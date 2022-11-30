@@ -20,14 +20,14 @@ You will need to have Docker Desktop running to build and run the containers.
 Note the example below is pushing to my (hkershaw) docker hub account.
 
 Example build and tag container:    
-`docker build --tag hkershaw/dart-dep:1.0 .   
+`docker build --tag hkershaw/dart-dep:1.0 .`   
 
 To run the container:    
-`docker run -it hkershaw/dart-dep:1.0 bash    
+`docker run -it hkershaw/dart-dep:1.0 bash`  
 
 To exit the container:    
 `exit`  
 
 Push to docker hub:    
-`docker push hkershaw/dart-dep:1.0
+`docker push hkershaw/dart-dep:1.0`  
 
