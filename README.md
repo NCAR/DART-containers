@@ -25,7 +25,9 @@ https://github.com/NCAR/DART/blob/e17959db1a917418e192b2c2a6c093dcefb5bdb5/.gith
 You will need to have Docker Desktop running to build and run the containers on your machine.    
 Note the example below is pushing to my (hkershaw) docker hub account.
 
-Example build and tag container:    
+Example build and tag container:
+
+`cd dart_dependencies_netcdf-env`  
 `docker build --tag hkershaw/dart-dep:1.0 .`   
 
 To run the container:    
