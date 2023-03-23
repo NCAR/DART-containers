@@ -1,8 +1,11 @@
 # DART Containers
 
 ## Description
-This is a repository for holding Dockerfile recipes for containers built for [DART](https://github.com/NCAR/DART). 
-Built images are hosted on the NCAR Dockerhub (no link yet)
+This is a repository for holding Dockerfile recipes for containers built for [DART](https://github.com/NCAR/DART).  
+NCAR does have a dockerhub orgranization: https://hub.docker.com/u/ncar but has currently maxed out its number of users.  
+
+DART Docker images are hosted on the [hkershaw](https://hub.docker.com/repositories/hkershaw) dockerhub.  
+If we make more use of containers, we may need to look at creating a DART organization.
 
 ## Containers
 ### dart_dependencies
@@ -16,7 +19,10 @@ Included packages and libraries:
 - build-essentials
 - git 
 
-You will need to have Docker Desktop running to build and run the containers.    
+This container is used in our github actions workflow for [pull requests](
+https://github.com/NCAR/DART/blob/e17959db1a917418e192b2c2a6c093dcefb5bdb5/.github/workflows/action_on_pull_request.yml#L15).
+
+You will need to have Docker Desktop running to build and run the containers on your machine.    
 Note the example below is pushing to my (hkershaw) docker hub account.
 
 Example build and tag container:    
