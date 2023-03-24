@@ -8,7 +8,7 @@ DART Docker images are hosted on the [hkershaw](https://hub.docker.com/repositor
 If we make more use of containers, we may need to look at creating a DART organization.
 
 ## Containers
-### dart_dependencies
+### dart_dependencies_netcdf-env
 A container on an Ubuntu base image containing only DART dependencies (DART source not included).
 
 Included packages and libraries:
