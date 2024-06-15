@@ -10,13 +10,26 @@ docker run -it --mount type=bind,source="$(pwd)"/target,target=/app,readonly --n
 
 # hdfeos patched version https://github.com/NCAR/DART/issues/590
 
-CC='h4cc -Df2cFortran'   FC=h4fc ./configure --enable-fortran  --prefix=/usr --with-hdf4=/usr
+# this wont find mdf lib
+#CC='h4cc -Df2cFortran'   FC=h4fc /app/hdf-eos2-3.0/configure --enable-fortran  --prefix=/usr --with-hdf4=/usr
+
+CPPFLAGS='-I/usr/include/hdf' /app/hdf-eos2-3.0/configure --enable-fortran  --prefix=/usr --with-hdf4=/usr --enable-shared
+make -j 8
+make install
+
 
 # rttov 12 & 13 flags:
 cd src
 edit ../build/Makefile.local (see rttov13.makefile.local)
 ../build/rttov_compile.sh 
 gfortran
+
+
+ ls /usr/include/hdf5/serial/hdf5.mod 
+
+FFLAGS_HDF5  = -D_RTTOV_HDF $(FFLAG_MOD)/usr/include/hdf5/serial
+
+LDFLAGS_HDF5 = -L/usr/lib/aarch64-linux-gnu -lhdf5_serialhl_fortran -lhdf5_hl -lhdf5_serial_fortran -lhdf5
 
 #commiting the container
 docker commit e92d8a3c6f31 hkershaw/dart-external-libs:1.4
