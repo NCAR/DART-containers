@@ -8,19 +8,6 @@ tar files of src code in local directory 'target' mounted as /app
 docker run -it --mount type=bind,source="$(pwd)"/target,target=/app,readonly --name lib-test hkershaw/dart-external-libs:1.1 bash
 
 
-# hdf4 
-install from src to get headers and static libraries
-
-configure: error: couldn't find rpc headers
-edit configure: https://gitlab.orfeo-toolbox.org/maja/maja/-/issues/207
-23672        CPPFLAGS="$SYSCPPFLAGS -I/usr/include/tirpc"
-             unset ac_cv_header_rpc_rpc_h
-
-FFLAGS=-fallow-argument-mismatch ./configure --enable-netcdf=no --prefix=/usr
-make -j 8
-make install
-
-
 # hdfeos patched version https://github.com/NCAR/DART/issues/590
 
 CC='h4cc -Df2cFortran'   FC=h4fc ./configure --enable-fortran  --prefix=/usr --with-hdf4=/usr

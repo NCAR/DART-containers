@@ -2,6 +2,7 @@
 FROM ubuntu:latest
 
 ENV HOME /home
+ENV NETCDF=/usr/
 WORKDIR /home
 
 
@@ -19,5 +20,8 @@ RUN apt-get -yq install libnetcdf-dev \
 			build-essential \
                         bison \
                         flex \
-                        wget
+                        wget \
+                        hdf4-tools \
+                        libtirpc-dev \
+                        libhdf4-dev
 
