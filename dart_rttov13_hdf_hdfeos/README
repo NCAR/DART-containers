@@ -1,6 +1,6 @@
 cd rttov123/srcNeed to set environment variables
 NETCDF=/usr/
-RTTOV=/home/rttov123_lib
+RTTOV=/home/rttov12_lib
 HDFEOS=/usr/
 
 
@@ -30,13 +30,8 @@ edit ../build/Makefile.local (see rttov12.makefile.local)
 gfortran
 
 prefix:
-../../rttov123_lib
+../rttov12_lib
 
- ls /usr/include/hdf5/serial/hdf5.mod 
-
-FFLAGS_HDF5  = -D_RTTOV_HDF $(FFLAG_MOD)/usr/include/hdf5/serial
-
-LDFLAGS_HDF5 = -L/usr/lib/aarch64-linux-gnu -lhdf5_serialhl_fortran -lhdf5_hl -lhdf5_serial_fortran -lhdf5
 
 rttov12
 HDF5_PREFIX  = /usr/
@@ -54,7 +49,7 @@ FFLAGS_HDF5  = -D_RTTOV_HDF $(FFLAG_MOD)/usr/include/hdf5/serial
 # In most cases:
 LDFLAGS_HDF5 = -L/usr/lib/aarch64-linux-gnu/ -lhdf5_serialhl_fortran -lhdf5_serial_hl -lhdf5_serial_fortran -lhdf5_serial
 
-
+-lGctp  /usr/bin/ld: /usr//lib/libhdfeos.so: undefined reference to `for_init'
 
 
 #commiting the container
