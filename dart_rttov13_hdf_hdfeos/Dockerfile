@@ -37,3 +37,8 @@ RUN wget  -O hdfeos.tar.gz  https://git.earthdata.nasa.gov/projects/DAS/repos/hd
     cd ~; \
     rm -rf ~/hdf-eos2-3.0 ~/hdfeos.tar.gz
 
+# Create a non-root user and set permissions
+RUN useradd -ms /bin/bash dartuser && \
+    chown -R dartuser:dartuser /home
+
+USER dartuser

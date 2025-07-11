@@ -1,7 +1,7 @@
 # container base image
 FROM ubuntu:latest
 
-ENV HOME /home
+ENV HOME=/home
 ENV NETCDF=/usr/
 WORKDIR /home
 
@@ -19,5 +19,9 @@ RUN apt-get -yq install libnetcdf-dev \
 						vim \
 						build-essential
 
+# Create a non-root user and set permissions
+RUN useradd -ms /bin/bash dartuser && \
+    chown -R dartuser:dartuser /home
 
+USER dartuser
 
