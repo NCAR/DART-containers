@@ -1,15 +1,15 @@
+
+Q. Does this mean for the build container step?
 cd rttov123/srcNeed to set environment variables
 NETCDF=/usr/
 RTTOV=/home/rttov12_lib
 HDFEOS=/usr/
 
-
-docker build --tag hkershaw/dart-dep-external:1.0 .
+docker build --tag hkershaw/dart-dep-external:3.0 .
 
 tar files of src code in local directory 'target' mounted as /app
 
-docker run -it --mount type=bind,source="$(pwd)"/target,target=/app,readonly --name lib-test hkershaw/dart-external-libs:1.1 bash
-
+docker run -it --mount type=bind,source="$(pwd)"/target,target=/app,readonly --name lib-test hkershaw/dart-dep-external:3.0 bash
 
 # hdfeos patched version https://github.com/NCAR/DART/issues/590
 
@@ -21,8 +21,7 @@ make -j 8
 make install
 
 
-# rttov 12 & 13 flags:
-
+# rttov 12
 cp -r /app/rttov123 . 
 cd rttov123/src
 edit ../build/Makefile.local (see rttov12.makefile.local)
@@ -32,27 +31,17 @@ gfortran
 prefix:
 ../rttov12_lib
 
+# rttov 13
+cp -r /app/rttov132 .
+cd rttov132/src/
+edit ../build/Makefile.local (see rttov13.makefile.local)
+../build/rttov_compile.sh
 
-rttov12
-HDF5_PREFIX  = /usr/
-
-# --- Uncomment one FFLAGS_HDF5 line:
-
-# For most compilersa
-FFLAGS_HDF5  = -D_RTTOV_HDF $(FFLAG_MOD)/usr/include/hdf5/serial
-
-# For xlf on AIX:
-# FFLAGS_HDF5  = -WF,-D_RTTOV_HDF $(FFLAG_MOD)$(HDF5_PREFIX)/include
-
-# --- Uncomment one LDFLAGS_HDF5 line:
-
-# In most cases:
-LDFLAGS_HDF5 = -L/usr/lib/aarch64-linux-gnu/ -lhdf5_serialhl_fortran -lhdf5_serial_hl -lhdf5_serial_fortran -lhdf5_serial
-
--lGctp  /usr/bin/ld: /usr//lib/libhdfeos.so: undefined reference to `for_init'
+gfortran
+prefix:
+../rttov13_lib
 
 
 #commiting the container
 docker ps # see which containers are running
-docker commit e92d8a3c6f31 hkershaw/dart-external-libs:1.4
-
+docker commit a19fe2a2676f hkershaw/dart-dep-external:3.0

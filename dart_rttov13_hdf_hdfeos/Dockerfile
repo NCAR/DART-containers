@@ -1,9 +1,10 @@
 # container base image
 FROM ubuntu:latest
 
-ENV HOME /home
+ENV HOME=/home
 ENV NETCDF=/usr/
-ENV RTTOV=/home/rttov12_lib/
+ENV RTTOV12=/home/rttov12_lib/
+ENV RTTOV13=/home/rttov13_lib/
 ENV HDFEOS=/usr/
 ENV HDF=/usr/
 WORKDIR /home
