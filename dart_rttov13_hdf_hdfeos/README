@@ -1,10 +1,4 @@
 
-Q. Does this mean for the build container step?
-cd rttov123/srcNeed to set environment variables
-NETCDF=/usr/
-RTTOV=/home/rttov12_lib
-HDFEOS=/usr/
-
 docker build --tag hkershaw/dart-dep-external:3.0 .
 
 tar files of src code in local directory 'target' mounted as /app

@@ -1,0 +1,35 @@
+# Template for AIRS observation converter with GNU gfortran on Linux or OSX 
+#
+# DART software - Copyright UCAR. This open source software is provided
+# by UCAR, "as is", without charge, subject to all terms of use at
+# http://www.image.ucar.edu/DAReS/DART/DART_download
+
+
+MPIFC = mpif90
+MPILD = mpif90
+FC = gfortran
+LD = h4fc
+
+#
+# NETCDF = /opt/local
+RTTOV=$(RTTOV12)
+
+RTTOV_VERSION = 12
+
+RTLIBS = -lrttov$(RTTOV_VERSION)_wrapper    -lrttov$(RTTOV_VERSION)_mw_scatt -lrttov$(RTTOV_VERSION)_brdf_atlas \
+         -lrttov$(RTTOV_VERSION)_emis_atlas -lrttov$(RTTOV_VERSION)_other    -lrttov$(RTTOV_VERSION)_parallel \
+         -lrttov$(RTTOV_VERSION)_coef_io    -lrttov$(RTTOV_VERSION)_hdf      -lrttov$(RTTOV_VERSION)_main
+
+INCS = -I$(NETCDF)/include -I$(HDFEOS)/include -I$(RTTOV)/include -I$(RTTOV)/mod
+
+LIBS = -L$(NETCDF)/lib -lnetcdff -lnetcdf \
+       -L$(HDFEOS)/lib -lhdfeos -lmfhdf -ldf -ljpeg -lz -lm -lsz -lGctp \
+       -L$(RTTOV)/lib $(RTLIBS) \
+       -L/usr/lib/aarch64-linux-gnu -lhdf5_serialhl_fortran -lhdf5_serial_hl -lhdf5_serial_fortran -lhdf5_serial
+
+#FFLAGS  = -O2 -ffree-line-length-none -fallow-argument-mismatch $(INCS)
+LDFLAGS = $(FFLAGS) $(LIBS)
+
+# Debug settings (preferably also use a RTTOV compiled with debug settings):
+FFLAGS = -g -Wuninitialized -Wunused -ffree-line-length-none -fbounds-check \
+         -fbacktrace -ffpe-trap=invalid,zero,overflow -fallow-argument-mismatch $(INCS)
