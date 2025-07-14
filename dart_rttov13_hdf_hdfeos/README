@@ -1,19 +1,15 @@
 
 docker build --tag hkershaw/dart-dep-external:3.0 .
 
+  Mac silicon, to run on amd64:
+  docker buildx build --platform linux/amd64 --tag hkershaw/dart-dep-external:4.0 .
+
 tar files of src code in local directory 'target' mounted as /app
 
 docker run -it --mount type=bind,source="$(pwd)"/target,target=/app,readonly --name lib-test hkershaw/dart-dep-external:3.0 bash
 
-# hdfeos patched version https://github.com/NCAR/DART/issues/590
-
-# this wont find mdf lib
-#CC='h4cc -Df2cFortran'   FC=h4fc /app/hdf-eos2-3.0/configure --enable-fortran  --prefix=/usr --with-hdf4=/usr
-
-CPPFLAGS='-I/usr/include/hdf' /app/hdf-eos2-3.0/configure --enable-fortran  --prefix=/usr --with-hdf4=/usr --enable-shared
-make -j 8
-make install
-
+  Mac silicon:
+  docker run -it --platform linux/amd64 --mount type=bind,source="$(pwd)"/target,target=/app,readonly --name lib-test hkershaw/dart-dep-external:4.0 bash
 
 # rttov 12
 cp -r /app/rttov123 . 
