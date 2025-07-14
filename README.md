@@ -27,14 +27,22 @@ Note the example below is pushing to my (hkershaw) docker hub account.
 
 Example build and tag container:
 
+> Note Github runner is amd 64 so if you are building on apple silicon, you will need to build for linux/amd64.   
+> `docker buildx build --platform linux/amd64 --tag hkershaw/dart-dep:2.0 .`
+
 `cd dart_dependencies_netcdf-env`  
 `docker build --tag hkershaw/dart-dep:1.0 .`   
 
 To run the container:    
 `docker run -it hkershaw/dart-dep:1.0 bash`  
 
+> Mac silicon:  
+> `docker run -it --platform linux/amd64 hkershaw/dart-dep:1.0 bash`
+
 To exit the container:    
 `exit`  
+
+
 
 Push to docker hub:    
 `docker push hkershaw/dart-dep:1.0`  
